@@ -1,39 +1,72 @@
-const default_compare_func = ((a, b) => (a < b) ? -1 : (a > b) ? 1 : 0);
 
+const default_compare_func = ((a, b) => (a < b) ? -1 : (a > b) ? 1 : 0);
+const DEFAULT_CAPACITY = 127;
+
+function swap(one, other) {
+  let temp = this.storage[one];
+  this.storage[one] = this.storage[other];
+  this.storage[other] = temp;
+}
+
+/**
+ * Min-heap based Priority Queue implementation
+ * 
+ * @property {boolean} allow_grow - When set to true, allows the priority queue's capacity to grow when needed. Default set to false.
+ */
 class PriorityQueue {
-  constructor(max_capacity, compare_func) {
-    // max_capacity must be a power of 2 minus 1
-    if ((max_capacity & (max_capacity + 1)) !== 0) {
-      throw `Illegal argument for max_capacity: ${max_capacity} is not (2^n)-1`;
+  /**
+   * This is a standard comparison callback, that should return negative if left is smaller than right, positive if left is larger than right, or zero if left and right are equal.
+   * 
+   * @callback comparisonFunc
+   * @param {*} left
+   * @param {*} right
+   */
+
+  /**
+   * Creates a new Priority Queue
+   * 
+   * @param {number} [capacity=127] - The initial capacity of the queue, must be (2^n)-1, for example 7, 15, 31, ...
+   * @param {comparisonFunc} [compare_func] - An optional comparison callback
+   */
+  constructor(capacity, compare_func) {
+    capacity = capacity || DEFAULT_CAPACITY;
+
+    if ((capacity & (capacity + 1)) !== 0) {
+      throw `Illegal argument for capacity: ${capacity} is not (2^n)-1`;
     }
-    this.storage = Array(max_capacity + 1);
-    this.capacity = max_capacity;
+
+    this.storage = Array(capacity + 1);
+    this.capacity = capacity;
     this.size = 0;
     this.compare_func = compare_func || default_compare_func;
     this.allow_grow = false;
   }
 
+  /**
+   * Returns true if the Priority Queue is empty
+   * 
+   * @returns {boolean} True if the queue is empty, otherwise false
+   */
   is_empty() {
     return this.size === 0;
   }
 
+  /**
+   * Inserts one new element into the queue
+   * 
+   * @param {*} element - The element to insert
+   */
   insert(element) {
     if (this.size === this.capacity) {
       if (this.allow_grow) {
-        /*
-        this.capacity = this.capacity * 2 + 1;
-        let new_storage = Array(this.capacity + 1);
-        this.storage.forEach((element, index) => { new_storage[index] = element });
-        this.storage.length = 0;
-        this.storage = new_storage;
-        */
        this.storage = this.storage.concat(this.storage);
        this.capacity = this.storage.length - 1;
       }
       else {
-        throw `Priority Queue full - max_capacity: ${this.capacity}`;
+        throw `Priority Queue full - capacity: ${this.capacity}`;
       }
     }
+
     // 1. Add the element to the bottom level of the heap
     let currentIndex = ++this.size;
     this.storage[currentIndex] = element;
@@ -44,18 +77,13 @@ class PriorityQueue {
     // 2.3 If they are in correct order, stop!
     // 2.4 Swap the current element with its parent and track the current element upward
     let parentIndex = currentIndex >> 1;
+
     while (currentIndex > 1 && this.compare_func(element, this.storage[parentIndex]) < 0) {
       this.storage[currentIndex] = this.storage[parentIndex];
       currentIndex = parentIndex;
       this.storage[currentIndex] = element;
       parentIndex = currentIndex >> 1;
     }
-  }
-
-  swap(one, other) {
-    let temp = this.storage[one];
-    this.storage[one] = this.storage[other];
-    this.storage[other] = temp;
   }
 
   poll() {
@@ -79,7 +107,7 @@ class PriorityQueue {
         // There is only one child - only compare with that one!
         // If the elements are in wrong order, swap them!
         if (this.compare_func(this.storage[currentIndex], this.storage[leftChildIndex]) > 0) {
-          this.swap(currentIndex, leftChildIndex);
+          swap.call(this, currentIndex, leftChildIndex);
         }
         // Safely break here, because this is definitely the last level!
         break;
@@ -92,7 +120,7 @@ class PriorityQueue {
         // Correct order - break!
         break;
       }
-      this.swap(currentIndex, compareIndex);
+      swap.call(this, currentIndex, compareIndex);
       currentIndex = compareIndex;
     }
 
