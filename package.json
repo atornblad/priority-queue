@@ -1,5 +1,5 @@
 {
-  "name": "priority-queue",
+  "name": "@atornblad/priority-queue",
   "version": "1.0.0",
   "description": "Min-heap-based implementation of Priority Queue for NodeJS and browsers",
   "main": "build/priority-queue.js",
