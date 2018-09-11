@@ -1,18 +1,31 @@
 {
   "name": "@atornblad/priority-queue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Min-heap-based implementation of Priority Queue for NodeJS and browsers",
   "main": "build/priority-queue.js",
   "scripts": {
     "build": "babel src -d build",
     "test": "babel src -d build && npx mocha",
-    "speed-test": "babel src -d build && node test/test-speed.js"
+    "speed-test": "babel src -d build && node test-speed.js",
+    "jsdoc": "jsdoc --destination ./jsdoc/ src",
+    "prepublish": "npm run jsdoc && npm run test && npm run build"
   },
-  "author": "Anders Tornblad",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbrtw/priority-queue.git"
+  },
+  "keywords": [
+    "algorithms",
+    "data structures",
+    "priority queue",
+    "queue"
+  ],
+  "author": "Anders Tornblad <npm@atornblad.se>",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-es2015-modules-simple-commonjs": "^0.3.0",
+    "jsdoc": "^3.5.5",
     "mocha": "^5.2.0"
   }
 }
