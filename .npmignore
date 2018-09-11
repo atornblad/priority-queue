@@ -1,0 +1,10 @@
+*.log
+npm-debug.log*
+
+node_modules
+package-lock.json
+src
+test
+.babelrc
+.gitignore
+.git
