@@ -1,4 +1,4 @@
-const PriorityQueue = require('../build/priority-queue.js');
+const PriorityQueue = require('./build/priority-queue.js');
 
 for (let capacity = 1; capacity <= 1023; capacity = capacity * 2 + 1) {
     for (let elements = 3; elements <= capacity * 5 + 1000; elements = Math.floor(elements * 1.35)) {
