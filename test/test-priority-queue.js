@@ -297,15 +297,15 @@ describe('Given a Priority Queue with several elements', () => {
 
     beforeEach((done) => {
         pq = new PriorityQueue(15);
-        pq.insert('10');
-        pq.insert('70');
-        pq.insert('30');
-        pq.insert('20');
-        pq.insert('80');
-        pq.insert('40');
-        pq.insert('50');
-        pq.insert('90');
-        pq.insert('60');
+        pq.insert(10);
+        pq.insert(70);
+        pq.insert(30);
+        pq.insert(20);
+        pq.insert(80);
+        pq.insert(40);
+        pq.insert(50);
+        pq.insert(90);
+        pq.insert(60);
         done();
     });
 
@@ -334,15 +334,15 @@ describe('Given a Priority Queue with several elements and a custom comparison f
 
     beforeEach((done) => {
         pq = new PriorityQueue(15, (a, b) => (b - a));
-        pq.insert('10');
-        pq.insert('70');
-        pq.insert('30');
-        pq.insert('20');
-        pq.insert('80');
-        pq.insert('40');
-        pq.insert('50');
-        pq.insert('90');
-        pq.insert('60');
+        pq.insert(10);
+        pq.insert(70);
+        pq.insert(30);
+        pq.insert(20);
+        pq.insert(80);
+        pq.insert(40);
+        pq.insert(50);
+        pq.insert(90);
+        pq.insert(60);
         done();
     });
 
