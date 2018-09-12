@@ -14,8 +14,12 @@ npm install --save @atornblad/priority-queue
 ```
 const PriorityQueue = require('@atornblad/priority-queue');
 
+// Must be 2^n - 1
 const INITIAL_CAPACITY = 15;
 let pq = new PriorityQueue(INITIAL_CAPACITY);
+
+// Allows queue to grow, but might lower performance
+pq.allow_grow = true;
 
 pq.insert(5);
 pq.insert(3);
@@ -84,3 +88,19 @@ poll():*
 
 Removes the element with the highest priority from the queue and returns it.
 
+# Version history
+
+## v1.0.0
+
+* Initial commit - a fully working JavaScript implementation of Priority Queue
+
+## v1.0.1
+
+* Some cleanup done
+* Added JsDoc comments and output
+
+## v1.0.2
+
+* Small performance enhancement
+* Added unit tests to cover allow_grow behavior
+* Updated README.md with an example of allow_grow
