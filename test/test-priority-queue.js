@@ -1,4 +1,4 @@
-const assert = require('assert');
+const { assert, expect } = require('chai')
 const PriorityQueue = require('../build/priority-queue.js');
 
 describe('Given a new Priority Queue', () => {
@@ -287,6 +287,79 @@ describe('Given a Priority Queue with exactly two element', () => {
             pq.poll();
             pq.poll();
             assert.strictEqual(pq.poll(), 200);
+            done();
+        });
+    });
+});
+
+describe('Given a Priority Queue that is not allowed to grow', () => {
+    let pq;
+
+    beforeEach((done) => {
+        pq = new PriorityQueue(3);
+        pq.insert(1);
+        pq.insert(2);
+        done();
+    });
+
+    describe('When I add one final element', () => {
+        beforeEach((done) => {
+            pq.insert(3);
+            done();
+        });
+
+        it('Should function correctly', (done) => {
+            assert.strictEqual(pq.get_size(), 3);
+            assert.strictEqual(pq.is_empty(), false);
+            assert.strictEqual(pq.poll(), 1);
+            assert.strictEqual(pq.peek(), 2);
+            assert.strictEqual(pq.poll(), 2);
+            assert.strictEqual(pq.poll(), 3);
+            assert.strictEqual(pq.poll(), undefined);
+            assert.strictEqual(pq.get_size(), 0);
+            assert.strictEqual(pq.is_empty(), true);
+            done();
+        });
+    });
+
+    describe('When I add one element too many', () => {
+        beforeEach((done) => {
+            pq.insert(3);
+            done();
+        });
+
+        it('Should throw an error', (done) => {
+            expect(pq.insert.bind(pq, 4)).to.throw('Priority Queue full - capacity: 3');
+            done();
+        });
+    });
+});
+
+describe('Given a Priority Queue that is allowed to grow', () => {
+    let pq;
+
+    beforeEach((done) => {
+        pq = new PriorityQueue(3);
+        pq.allow_grow = true;
+        pq.insert(1);
+        pq.insert(2);
+        pq.insert(3);
+        done();
+    });
+
+    describe('When I add one extra element', () => {
+        it('Should function correctly', (done) => {
+            pq.insert(4);
+            assert.strictEqual(pq.get_size(), 4);
+            assert.strictEqual(pq.is_empty(), false);
+            assert.strictEqual(pq.poll(), 1);
+            assert.strictEqual(pq.peek(), 2);
+            assert.strictEqual(pq.poll(), 2);
+            assert.strictEqual(pq.poll(), 3);
+            assert.strictEqual(pq.poll(), 4);
+            assert.strictEqual(pq.poll(), undefined);
+            assert.strictEqual(pq.get_size(), 0);
+            assert.strictEqual(pq.is_empty(), true);
             done();
         });
     });
