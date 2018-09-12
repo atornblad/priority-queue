@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lbrtw/priority-queue.svg?branch=master)](https://travis-ci.org/lbrtw/priority-queue)
+
 # priority-queue
 Min-heap-based implementation of Priority Queue for NodeJS and browsers
 
