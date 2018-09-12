@@ -127,7 +127,7 @@ class PriorityQueue {
       // Find the smallest element of the two children
       let compareIndex = (this.compare_func(this.storage[leftChildIndex], this.storage[rightChildIndex]) < 0 ? leftChildIndex : rightChildIndex);
       // Compare the current element with the smallest of its children
-      if (this.compare_func(this.storage[currentIndex], this.storage[compareIndex]) < 0) {
+      if (this.compare_func(this.storage[currentIndex], this.storage[compareIndex]) <= 0) {
         // Correct order - break!
         break;
       }
