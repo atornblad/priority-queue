@@ -16,12 +16,7 @@ npm install --save @atornblad/priority-queue
 ```
 const PriorityQueue = require('@atornblad/priority-queue');
 
-// Must be 2^n - 1
-const INITIAL_CAPACITY = 15;
-let pq = new PriorityQueue(INITIAL_CAPACITY);
-
-// Allows queue to grow, but might lower performance
-pq.allow_grow = true;
+let pq = new PriorityQueue();
 
 pq.insert(5);
 pq.insert(3);
@@ -51,12 +46,12 @@ Creates a new Priority Queue
 
 **Parameters:**
 
-* `capacity:number` : *The initial capacity of the queue, must be 2<sup>n</sup>-1, for example 7, 15, 31, ...*
+* `capacity:number` : *The initial capacity of the queue, default is 127*
 * `compare_func` : *An optional comparison callback* 
 
 **Properties:**
 
-* `allow_grow:boolean` : *When set to true, allows the queue to grow when needed*
+* `allow_grow:boolean` : *Initially set to true. When set to false, forbids the queue from growing when needed*
 
 ### Methods
 
@@ -106,3 +101,11 @@ Removes the element with the highest priority from the queue and returns it.
 * Small performance enhancement
 * Added unit tests to cover allow_grow behavior
 * Updated README.md with an example of allow_grow
+
+## v1.0.3
+
+* Removed requirement that initial capacity must be 2^n-1
+
+## v1.0.4
+
+* Changed default value of allow_grow to true

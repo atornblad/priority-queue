@@ -297,6 +297,7 @@ describe('Given a Priority Queue that is not allowed to grow', () => {
 
     beforeEach((done) => {
         pq = new PriorityQueue(3);
+        pq.allow_grow = false;
         pq.insert(1);
         pq.insert(2);
         done();
@@ -340,7 +341,6 @@ describe('Given a Priority Queue that is allowed to grow', () => {
 
     beforeEach((done) => {
         pq = new PriorityQueue(3);
-        pq.allow_grow = true;
         pq.insert(1);
         pq.insert(2);
         pq.insert(3);

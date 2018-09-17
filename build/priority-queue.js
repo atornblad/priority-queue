@@ -32,21 +32,21 @@ class PriorityQueue {
   /**
    * Creates a new Priority Queue
    * 
-   * @param {number} [capacity=127] - The initial capacity of the queue, must be (2^n)-1, for example 7, 15, 31, ...
+   * @param {number} [capacity=127] - The initial capacity of the queue, would preferably be (2^n)-1, for example 7, 15, 31..., but is not required
    * @param {comparisonFunc} [compare_func] - An optional comparison callback
    */
   constructor(capacity, compare_func) {
     capacity = capacity || DEFAULT_CAPACITY;
 
-    if ((capacity & capacity + 1) !== 0) {
-      throw `Illegal argument for capacity: ${capacity} is not (2^n)-1`;
+    if (capacity < 1) {
+      throw `Illegal argument for capacity: ${capacity}`;
     }
 
     this.storage = Array(capacity + 1);
     this.capacity = capacity;
     this.size = 0;
     this.compare_func = compare_func || default_compare_func;
-    this.allow_grow = false;
+    this.allow_grow = true;
   }
 
   /**
