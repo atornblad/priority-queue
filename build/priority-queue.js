@@ -3,7 +3,7 @@
 /**
  * @file Contains the definition for the @atornblad/priority-queue npm module
  * @author Anders Tornblad
- * @version 1.0.2
+ * @version 1.0.4
  */
 
 const default_compare_func = (a, b) => a < b ? -1 : a > b ? 1 : 0;

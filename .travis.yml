@@ -3,3 +3,9 @@ git:
   quiet: true
 node_js:
   - "node"
+notifications:
+  email:
+    recipients:
+      - npm-travis-builds@atornblad.se
+    on_success: always
+    on_failure: always
