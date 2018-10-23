@@ -109,3 +109,7 @@ Removes the element with the highest priority from the queue and returns it.
 ## v1.0.4
 
 * Changed default value of allow_grow to true
+
+## v1.0.5
+
+* Removed unnecessary writes to improve performance slightly

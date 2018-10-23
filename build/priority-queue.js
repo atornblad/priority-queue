@@ -76,7 +76,6 @@ class PriorityQueue {
 
     // 1. Add the element to the bottom level of the heap
     let currentIndex = ++this.size;
-    this.storage[currentIndex] = element;
 
     // 2. Loop:
     // 2.1 If the current element is at root, stop!
@@ -88,9 +87,10 @@ class PriorityQueue {
     while (currentIndex > 1 && this.compare_func(element, this.storage[parentIndex]) < 0) {
       this.storage[currentIndex] = this.storage[parentIndex];
       currentIndex = parentIndex;
-      this.storage[currentIndex] = element;
       parentIndex = currentIndex >> 1;
     }
+
+    this.storage[currentIndex] = element;
   }
 
   /**
